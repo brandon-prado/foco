@@ -1,0 +1,93 @@
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  /* Estilo para el fondo de la página */
+  body {
+    background-color: #FFFFE0; /* Amarillo claro */
+  }
+
+  /* Estilo para centrar el título */
+  h1 {
+    text-align: center;
+    text-size-adjust: initial;
+    font-family: 'Arial Round', sans-serif; /* Cambia 'NOMBRE DE TU FUENTE' por el nombre de la fuente que descargaste o enlazaste */
+  }
+
+  /* Estilo para centrar los botones e imagen */
+  .button-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* Estilo para los botones de imagen */
+  .image-button {
+    padding: 10px; /* Añade espaciado alrededor de la imagen */
+  }
+
+  /* Estilo para la imagen */
+  #focoImagenOn {
+    width: 150px; /* Ancho de 100px */
+    height: 150px; /* Altura de 150px */
+    display: block; /* Convertir en elemento de bloque para centrar */
+    margin: 0 auto; /* Centrar horizontalmente */
+    position: relative; /* Establecer la posición a relativa */
+    z-index: 1; /* Colocar la imagen encima de los botones */
+    border: 2px solid black; /* Contorno negro de 2px */
+  }
+
+  /* Estilo para la imagen */
+  #focoImagenOff {
+    width: 100px; /* Ancho de 100px */
+    height: 140px; /* Altura de 150px */
+    display: block; /* Convertir en elemento de bloque para centrar */
+    margin: 0 auto; /* Centrar horizontalmente */
+    position: relative; /* Establecer la posición a relativa */
+    z-index: 1; /* Colocar la imagen encima de los botones */
+    border: 2px solid black; /* Contorno negro de 2px */
+  }
+
+  /* Estilo para los botones con separación */
+  .custom-button {
+    margin-top: 10px; /* Espacio superior para separación */
+  }
+</style>
+
+<script>
+var accessToken = "32c87f834fe3f4b89fab39185a62f236d245d7b0";
+var deviceID = "380035000c47343438323536";
+var url = "https://api.particle.io/v1/devices/" + deviceID + "/led";
+
+function switchOn() {
+  $.post(url, {params: "on", access_token: accessToken })
+    .done(function(response) {
+      if (response === 1) {
+        // Cambiar la imagen a foco encendido
+        $("#focoImagenOn").attr("src", "encendido.gif"); // Ruta absoluta
+      }
+    });
+}
+
+function switchOff() {
+  $.post(url, {params: "off", access_token: accessToken })
+    .done(function(response) {
+      if (response === 0) {
+        // Cambiar la imagen a foco apagado
+        $("#focoImagenOff").attr("src", "apagado.jpg"); // Ruta absoluta
+      }
+    });
+}
+</script>
+</head>
+
+<body>
+<h1>Control de foco</h1>
+<div class="button-container">
+  <img id="focoImagenOff" src="apagado.jpg" alt="Foco apagado">
+  <input type="button" class="custom-button" onClick="switchOn()" value="ON"/>
+  <input type="button" class="custom-button" onClick="switchOff()" value="OFF"/>
+</div>
+</body>
+</html>
