@@ -26,6 +26,28 @@
     .custom-button {
       margin-top: 10px; /* Espacio superior para separación */
     }
+
+    /* Estilo para la imagen */
+  #focoImagenOn {
+    width: 150px; /* Ancho de 100px */
+    height: 150px; /* Altura de 150px */
+    display: block; /* Convertir en elemento de bloque para centrar */
+    margin: 0 auto; /* Centrar horizontalmente */
+    position: relative; /* Establecer la posición a relativa */
+    z-index: 1; /* Colocar la imagen encima de los botones */
+    border: 2px solid black; /* Contorno negro de 2px */
+  }
+
+  /* Estilo para la imagen */
+  #focoImagenOff {
+    width: 100px; /* Ancho de 100px */
+    height: 140px; /* Altura de 150px */
+    display: block; /* Convertir en elemento de bloque para centrar */
+    margin: 0 auto; /* Centrar horizontalmente */
+    position: relative; /* Establecer la posición a relativa */
+    z-index: 1; /* Colocar la imagen encima de los botones */
+    border: 2px solid black; /* Contorno negro de 2px */
+  }
   </style>
 
   <script>
@@ -38,7 +60,7 @@
         .done(function(response) {
           if (response.return_value === 1) {
             // Cambiar la imagen a foco encendido
-            $("#focoImagen").attr("src", "descarga.jpeg");
+            $("#focoImagenOn").attr("src", "descarga.jpeg");
           }
         });
     }
@@ -48,7 +70,7 @@
         .done(function(response) {
           if (response.return_value === 0) {
             // Cambiar la imagen a foco apagado
-            $("#focoImagen").attr("src", "apagado.jpg");
+            $("#focoImagenOff").attr("src", "apagado.jpg");
           }
         });
     }
@@ -58,7 +80,7 @@
 <body>
   <h1>Control de foco</h1>
   <div class="button-container">
-    <img id="focoImagen" src="apagado.jpg" alt="Foco apagado">
+    <img id="focoImagenOff" src="apagado.jpg" alt="Foco apagado">
     <input type="button" class="custom-button" onclick="switchOn()" value="ON" />
     <input type="button" class="custom-button" onclick="switchOff()" value="OFF" />
   </div>
