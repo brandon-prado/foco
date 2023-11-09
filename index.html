@@ -48,7 +48,7 @@
         .done(function(response) {
           if (response.return_value === 0) {
             // Cambiar la imagen a foco apagado
-            $("#focoImagen").attr("src", "apagado.jpg");
+            $("#focoImagen").attr("src", "apagado.png");
           }
         });
     }
@@ -58,7 +58,7 @@
 <body>
   <h1>Control de foco</h1>
   <div class="button-container">
-    <img id="focoImagen" src="apagado.jpg" alt="Foco apagado">
+    <img id="focoImagen" src="apagado.png" alt="Foco apagado">
     <input type="button" class="custom-button" onclick="switchOn()" value="ON" />
     <input type="button" class="custom-button" onclick="switchOff()" value="OFF" />
   </div>
