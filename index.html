@@ -37,9 +37,15 @@
       $.post(url, { params: "on", access_token: accessToken })
         .done(function(response) {
           if (response.return_value === 1) {
+            // Imprimir en la consola el valor que retorna la función
+            console.log("Respuesta de switchOn:", response.return_value);
             // Cambiar la imagen a foco encendido
             $("#focoImagen").attr("src", "encendido.gif");
           }
+        })
+      .fail(function(error) {
+          // Imprimir en la consola el error en caso de fallo
+          console.error("Error en switchOn:", error);
         });
     }
 
@@ -47,9 +53,15 @@
       $.post(url, { params: "off", access_token: accessToken })
         .done(function(response) {
           if (response.return_value === 0) {
+            // Imprimir en la consola el valor que retorna la función
+            console.log("Respuesta de switchOff:", response.return_value);
             // Cambiar la imagen a foco apagado
             $("#focoImagen").attr("src", "apagado.png");
           }
+        })
+      .fail(function(error) {
+          // Imprimir en la consola el error en caso de fallo
+          console.error("Error en switchOff:", error);
         });
     }
   </script>
