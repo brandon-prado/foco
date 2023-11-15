@@ -26,6 +26,13 @@
     .custom-button {
       margin-top: 10px; /* Espacio superior para separación */
     }
+
+    /* Estilo para el label de valor retornado */
+    #responseValue {
+      font-family: 'Arial Round', sans-serif; /* Cambia 'NOMBRE DE TU FUENTE' por la fuente que prefieras */
+      font-size: 24px; /* Tamaño del texto del label */
+      margin-top: 20px; /* Espacio superior para separación del label */
+    }
   </style>
 
   <script>
@@ -36,32 +43,40 @@
     function switchOn() {
       $.post(url, { params: "on", access_token: accessToken })
         .done(function(response) {
-          if (response.return_value === 1) {
-            // Imprimir en la consola el valor que retorna la función
-            console.log("Respuesta de switchOn:", response.return_value);
-            // Cambiar la imagen a foco encendido
-            $("#focoImagen").attr("src", "encendido.gif");
-          }
+          // Imprimir en la consola el valor que retorna la función
+          console.log("Respuesta de switchOn:", response.return_value);
+          // Actualizar el valor en el label
+          $("#responseValue").text("Encendido 💡 -> Valor retornado: " + response.return_value);
+          // Cambiar la imagen a foco encendido
+          $("#focoImagen").attr("src", "encendido.gif");
         })
-      .fail(function(error) {
+        .fail(function(error) {
           // Imprimir en la consola el error en caso de fallo
           console.error("Error en switchOn:", error);
+          // Actualizar el valor en el label
+          //$("#responseValue").text("Error de comunicación 💡❌");
+          // Cambiar la imagen a foco apagado
+          $("#focoImagen").attr("src", "apagado.png");
         });
     }
 
     function switchOff() {
       $.post(url, { params: "off", access_token: accessToken })
         .done(function(response) {
-          if (response.return_value === 0) {
-            // Imprimir en la consola el valor que retorna la función
-            console.log("Respuesta de switchOff:", response.return_value);
-            // Cambiar la imagen a foco apagado
-            $("#focoImagen").attr("src", "apagado.png");
-          }
+          // Imprimir en la consola el valor que retorna la función
+          console.log("Respuesta de switchOff:", response.return_value);
+          // Actualizar el valor en el label
+          $("#responseValue").text("Apagado 💡❗ -> Valor retornado: " + response.return_value);
+          // Cambiar la imagen a foco apagado
+          $("#focoImagen").attr("src", "apagado.png");
         })
-      .fail(function(error) {
+        .fail(function(error) {
           // Imprimir en la consola el error en caso de fallo
           console.error("Error en switchOff:", error);
+          // Actualizar el valor en el label
+          //$("#responseValue").text("Error de comunicación 💡❌");
+          // Cambiar la imagen a foco apagado
+          $("#focoImagen").attr("src", "apagado.png");
         });
     }
   </script>
@@ -71,6 +86,7 @@
   <h1>Control de foco</h1>
   <div class="button-container">
     <img id="focoImagen" src="apagado.png" alt="Foco apagado">
+    <label id="responseValue">Valor retornado: Ninguno</label>
     <input type="button" class="custom-button" onclick="switchOn()" value="ON" />
     <input type="button" class="custom-button" onclick="switchOff()" value="OFF" />
   </div>
